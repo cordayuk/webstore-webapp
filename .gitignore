@@ -12,3 +12,4 @@ src/main/java/com/fakeshop/webapp/web/controller/
 src/main/resources/static/
 src/main/resources/templates/
 src/test/
+/h2-1.4.196.jar/
