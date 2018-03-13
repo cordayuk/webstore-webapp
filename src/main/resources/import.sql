@@ -1,0 +1,1 @@
+insert into Product (id, name, description, price, picture) values(1, 'Phone', 'This is a phone', 2.99, null);

@@ -5,11 +5,5 @@ gradle/
 gradlew
 gradlew.bat
 settings.gradle
-src/main/java/com/fakeshop/webapp/dao/
-src/main/java/com/fakeshop/webapp/model/
-src/main/java/com/fakeshop/webapp/service/
-src/main/java/com/fakeshop/webapp/web/controller/
-src/main/resources/static/
-src/main/resources/templates/
 src/test/
 
