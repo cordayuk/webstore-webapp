@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -24,21 +26,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    private PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder(10); }
+    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder(10); }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/account/**").hasRole("CUSTOMER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
-                .and()
+                    .antMatchers("/account/**").hasRole("CUSTOMER")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/**").permitAll()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout().permitAll();
+                    .loginPage("/login")
+                    .permitAll()
+                    .successHandler(loginSuccessHandler())
+                    .failureHandler(loginFailureHandler())
+                    .and()
+                .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/");
 
 
         // Security configuration to allow in memory h2-console to be accessed
@@ -54,6 +60,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity webSecurity){
         webSecurity.ignoring().antMatchers("/static/**");
         }
+    public AuthenticationSuccessHandler loginSuccessHandler() {
+        return (request, response, authentication) -> response.sendRedirect("/");
+    }
+
+    public AuthenticationFailureHandler loginFailureHandler() {
+        return ((request, response, exception) -> {
+           response.sendRedirect("/login");
+        });
+    }
 }
 
 

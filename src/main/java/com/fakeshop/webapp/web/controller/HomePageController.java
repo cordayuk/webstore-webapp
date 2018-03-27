@@ -29,8 +29,8 @@ public class HomePageController {
 
     @RequestMapping("/login")
     public String userLogin(Model model){
-        model.addAttribute("hello", "hi");
-        return "home";
+
+        return "login";
     }
 
     @RequestMapping("/account/hello")
