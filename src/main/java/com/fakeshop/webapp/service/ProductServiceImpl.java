@@ -4,7 +4,9 @@ import com.fakeshop.webapp.dao.ProductDao;
 import com.fakeshop.webapp.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -12,8 +14,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDao productDao;
 
-    public Optional<Product> findById(Long id) {
-        return productDao.findById(id);
+    public Product findById(Long id) {
+        return productDao.findById(id).get();
     }
 
     @Override
@@ -22,8 +24,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(Product product) {
-        productDao.save(product);
+    public void save(Product product, MultipartFile file) {
+        try {
+            product.setPicture(file.getBytes());
+            productDao.save(product);
+        } catch (IOException ioe){
+            System.out.println("Unable to get byte array form uploaded file");
+        }
     }
 
     @Override
