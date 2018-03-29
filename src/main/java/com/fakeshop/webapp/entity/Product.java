@@ -1,4 +1,4 @@
-package com.fakeshop.webapp.model;
+package com.fakeshop.webapp.entity;
 
 import javax.persistence.*;
 

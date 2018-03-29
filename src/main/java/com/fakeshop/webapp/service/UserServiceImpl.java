@@ -1,7 +1,7 @@
 package com.fakeshop.webapp.service;
 
 import com.fakeshop.webapp.dao.UserDao;
-import com.fakeshop.webapp.model.User;
+import com.fakeshop.webapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

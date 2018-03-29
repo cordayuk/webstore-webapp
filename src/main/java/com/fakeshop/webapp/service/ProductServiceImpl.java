@@ -1,13 +1,12 @@
 package com.fakeshop.webapp.service;
 
 import com.fakeshop.webapp.dao.ProductDao;
-import com.fakeshop.webapp.model.Product;
+import com.fakeshop.webapp.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -15,7 +14,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     public Product findById(Long id) {
-        return productDao.findById(id).get();
+            return productDao.findById(id).get();
     }
 
     @Override

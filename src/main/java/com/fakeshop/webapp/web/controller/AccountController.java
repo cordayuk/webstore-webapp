@@ -1,9 +1,8 @@
 package com.fakeshop.webapp.web.controller;
 
-import com.fakeshop.webapp.model.User;
+import com.fakeshop.webapp.entity.User;
 import com.fakeshop.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

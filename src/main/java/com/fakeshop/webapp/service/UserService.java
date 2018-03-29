@@ -1,8 +1,7 @@
 package com.fakeshop.webapp.service;
 
-import com.fakeshop.webapp.model.User;
+import com.fakeshop.webapp.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 

@@ -1,15 +1,12 @@
 package com.fakeshop.webapp.web.controller;
 
-import com.fakeshop.webapp.dao.ProductDao;
-import com.fakeshop.webapp.model.Product;
+import com.fakeshop.webapp.entity.Product;
 import com.fakeshop.webapp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.jws.WebParam;
 
 @Controller
 public class HomePageController {
