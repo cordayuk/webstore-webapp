@@ -19,6 +19,16 @@ public class UserServiceImpl implements UserService  {
     }
 
     @Override
+    public void save(User user) {
+        userDao.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userDao.delete(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByEmail(username);
         if(user == null){
