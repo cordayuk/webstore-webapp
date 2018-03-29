@@ -19,25 +19,25 @@ public class AccountController {
 
     @RequestMapping("/account")
     public String account(Principal principal){
-        User user = getCurrentUser(principal);
+        User user = userService.getCurrentUser(principal);
         return null;
     }
 
     @RequestMapping("/account/orders")
     public String orders(Principal principal) {
-        User user = getCurrentUser(principal);
+        User user = userService.getCurrentUser(principal);
         return null;
     }
 
     @RequestMapping("account/details")
     public String details(Principal principal) {
-        User user = getCurrentUser(principal);
+        User user = userService.getCurrentUser(principal);
         return null;
     }
 
     @RequestMapping("account/details/edit")
     public String editDetailsForm(Principal principal){
-        User user = getCurrentUser(principal);
+        User user = userService.getCurrentUser(principal);
         return null;
     }
 
@@ -48,14 +48,8 @@ public class AccountController {
 
     @RequestMapping(value = "/account/details/delete", method = RequestMethod.POST)
     public String deleteUser(Principal principal, Authentication authentication){
-        userService.delete(getCurrentUser(principal));
+        userService.delete(userService.getCurrentUser(principal));
         authentication.setAuthenticated(false);
         return "redirect:/";
     }
-
-    @Bean
-    private User getCurrentUser(Principal principal){
-        return userService.findByEmail(principal.getName());
-    }
-
 }

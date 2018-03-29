@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 @Service
 public class UserServiceImpl implements UserService  {
     @Autowired
@@ -26,6 +28,11 @@ public class UserServiceImpl implements UserService  {
     @Override
     public void delete(User user) {
         userDao.delete(user);
+    }
+
+    @Override
+    public User getCurrentUser(Principal principal) {
+        return findByEmail(principal.getName());
     }
 
     @Override
