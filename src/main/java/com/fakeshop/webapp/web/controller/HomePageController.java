@@ -1,29 +1,25 @@
 package com.fakeshop.webapp.web.controller;
 
+import com.fakeshop.webapp.dao.ProductDao;
+import com.fakeshop.webapp.model.Product;
+import com.fakeshop.webapp.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.jws.WebParam;
 
 @Controller
 public class HomePageController {
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping("/")
     public String homepage(Model model){
-        model.addAttribute("hello", "hi");
-        return "home";
-    }
-
-    @RequestMapping("/loginadmin")
-    public String adminLogin(Model model){
-        model.addAttribute("hello", "hi");
-        return "home";
-    }
-
-    @RequestMapping("/admin/hello")
-    public String adminTest(Model model){
-        model.addAttribute("hello", "hi");
+        Iterable<Product> products = productService.findAll();
+        model.addAttribute("products", products);
         return "home";
     }
 
@@ -33,11 +29,17 @@ public class HomePageController {
         return "login";
     }
 
-    @RequestMapping("/account/hello")
-    public String userTest(Model model){
-        model.addAttribute("hello", "hi");
-        return "home";
+    @RequestMapping("/{productId}")
+    public String productPage(@RequestParam Long productId, Model model) {
+        Product product = productService.findById(productId);
+        model.addAttribute("product", product);
+
+        return null;
     }
 
+    @RequestMapping("/checkout")
+    public String checkout() {
+        return null;
+    }
 
 }
