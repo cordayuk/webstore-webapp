@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+import static com.fakeshop.webapp.model.ShoppingCartProduct.createShoppingCartProduct;
+
 @Component
 public class ShoppingCart {
 
@@ -31,7 +33,7 @@ public class ShoppingCart {
             }
         }
         if(!inCart){
-            shoppingCart.add(new ShoppingCartProduct(product, quantity));
+            shoppingCart.add(createShoppingCartProduct(product, quantity));
         }
     }
 

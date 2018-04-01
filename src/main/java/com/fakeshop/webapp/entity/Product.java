@@ -11,7 +11,6 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    //TODO: cc - implement a category class to organise products.
     @Lob
     private byte[] picture;
 

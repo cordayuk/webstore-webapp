@@ -8,10 +8,16 @@ public class ShoppingCartProduct {
     private Product product;
     private int quantity;
 
+    public ShoppingCartProduct() {
+    }
 
-    public ShoppingCartProduct(Product product, int quantity) {
+    private ShoppingCartProduct(Product product, int quantity){
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public static ShoppingCartProduct createShoppingCartProduct(Product product, int quantity) {
+        return new ShoppingCartProduct(product, quantity);
     }
 
     public Product getProduct() {
