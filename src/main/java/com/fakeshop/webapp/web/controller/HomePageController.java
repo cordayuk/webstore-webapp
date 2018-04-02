@@ -37,8 +37,7 @@ public class HomePageController {
     }
 
     @RequestMapping("/login")
-    public String userLogin(Model model){
-
+    public String userLogin(){
         return "login";
     }
 
@@ -50,6 +49,14 @@ public class HomePageController {
         return "shared/product";
     }
 
+    // return a product image
+    @RequestMapping("/products/{productId}.jpg")
+    @ResponseBody
+    public byte[] productImage(@PathVariable Long productId) {
+        return productService.findById(productId).getPicture();
+    }
+
+    // TODO: CC - complete checkout page and function
     @RequestMapping("/checkout")
     public String checkout() {
         return "checkout";

@@ -6,5 +6,16 @@
 </head>
 <body>
 <h1>Hello there this is the home page</h1>
+<ol>
+<div th:each="product : ${products}">
+    <li>
+        <a th:href="@{|/${product.id}|}">
+        <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
+        <label th:text="${product.name}"></label>
+            <b th:text="|£${product.price}|"></b>
+        </a>
+    </li>
+</div>
+</ol>
 </body>
 </html>
