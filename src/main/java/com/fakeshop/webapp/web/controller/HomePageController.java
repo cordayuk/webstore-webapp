@@ -1,23 +1,39 @@
 package com.fakeshop.webapp.web.controller;
 
 import com.fakeshop.webapp.entity.Product;
+import com.fakeshop.webapp.entity.User;
 import com.fakeshop.webapp.service.ProductService;
+import com.fakeshop.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomePageController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String homepage(Model model){
         Iterable<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "home";
+    }
+
+    @RequestMapping("/signup")
+    public String signUp(Model model) {
+        model.addAttribute("newUser", new User());
+        return "signup";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signUpPost(@ModelAttribute User user) {
+        userService.saveNewCustomer(user);
+        return "redirect:/login";
     }
 
     @RequestMapping("/login")
@@ -27,16 +43,16 @@ public class HomePageController {
     }
 
     @RequestMapping("/{productId}")
-    public String productPage(@RequestParam Long productId, Model model) {
+    public String productPage(@PathVariable Long productId, Model model) {
         Product product = productService.findById(productId);
         model.addAttribute("product", product);
 
-        return null;
+        return "shared/product";
     }
 
     @RequestMapping("/checkout")
     public String checkout() {
-        return null;
+        return "checkout";
     }
 
 }

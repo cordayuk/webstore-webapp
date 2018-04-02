@@ -52,6 +52,7 @@ public class AdminController {
     public String addProductForm(Model model) {
         if(!model.containsAttribute("product")){
             model.addAttribute("product", new Product());
+            model.addAttribute("action", "/admin/products/add");
         }
         // action must post to /admin/products/add
         return "admin/form";
@@ -62,7 +63,7 @@ public class AdminController {
     public String addProduct(Product product, @PathVariable MultipartFile file){
         productService.save(product, file);
 
-        return String.format("redirect:/products/%s", product.getId());
+        return String.format("redirect:/admin/products/%s", product.getId());
     }
 
     // Form for editing products

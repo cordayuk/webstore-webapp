@@ -93,4 +93,40 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return isEnabled;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getNonExpired() {
+        return isNonExpired;
+    }
+
+    public void setNonExpired(Boolean nonExpired) {
+        isNonExpired = nonExpired;
+    }
+
+    public Boolean getNonLocked() {
+        return isNonLocked;
+    }
+
+    public void setNonLocked(Boolean nonLocked) {
+        isNonLocked = nonLocked;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
 }
