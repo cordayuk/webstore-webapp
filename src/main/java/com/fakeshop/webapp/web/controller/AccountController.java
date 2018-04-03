@@ -22,19 +22,19 @@ public class AccountController {
     private OrderService orderService;
 
     @RequestMapping("/account")
-    public String account(Principal principal){
-        User user = userService.getCurrentUser(principal);
+    public String account(Model model){
         return "customer/account";
     }
 
     @RequestMapping("/account/orders")
-    public String orders(Principal principal) {
-        User user = userService.getCurrentUser(principal);
+    public String orders(Model model) {
+        model.addAttribute("orders", orderService.findAllUserOrders());
         return "customer/orders";
     }
 
     @RequestMapping("/account/orders/{orderId}")
     public String orderDetails(@PathVariable Long orderId, Model model) {
+        model.addAttribute("order", orderService.findSpecificUserOrder(orderId));
         return "shared/orderdetail";
     }
 
@@ -45,13 +45,16 @@ public class AccountController {
     }
 
     @RequestMapping("account/details/edit")
-    public String editDetailsForm(Principal principal){
-        User user = userService.getCurrentUser(principal);
+    public String editDetailsForm(Model model, Principal principal){
+        if(!model.containsAttribute("user")){
+            model.addAttribute("user", userService.getCurrentUser(principal));
+        }
         return "customer/form";
     }
 
     @RequestMapping(value = "/account/details/edit", method = RequestMethod.POST)
-    public String editDetails() {
+    public String editDetails(User user) {
+        userService.save(user);
         return "redirect:/account";
     }
 

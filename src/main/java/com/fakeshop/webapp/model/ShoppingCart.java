@@ -3,23 +3,25 @@ package com.fakeshop.webapp.model;
 import com.fakeshop.webapp.entity.Product;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static com.fakeshop.webapp.model.ShoppingCartProduct.createShoppingCartProduct;
 
 @Component
 public class ShoppingCart {
 
-    private Collection<ShoppingCartProduct> shoppingCart;
+    private List<ShoppingCartProduct> shoppingCart = new ArrayList<>();
 
     public ShoppingCart() {
     }
 
-    public Collection<ShoppingCartProduct> getShoppingCart() {
+    public List<ShoppingCartProduct> getShoppingCart() {
         return shoppingCart;
     }
 
-    public void setShoppingCart(Collection<ShoppingCartProduct> shoppingCart) {
+    public void setShoppingCart(List<ShoppingCartProduct> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 

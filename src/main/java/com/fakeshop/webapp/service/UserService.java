@@ -1,9 +1,11 @@
 package com.fakeshop.webapp.service;
 
+import com.fakeshop.webapp.entity.Order;
 import com.fakeshop.webapp.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.security.Principal;
+import java.util.Collection;
 
 
 public interface UserService extends UserDetailsService{

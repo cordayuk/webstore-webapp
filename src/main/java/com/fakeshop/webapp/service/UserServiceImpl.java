@@ -2,6 +2,7 @@ package com.fakeshop.webapp.service;
 
 import com.fakeshop.webapp.dao.RoleDao;
 import com.fakeshop.webapp.dao.UserDao;
+import com.fakeshop.webapp.entity.Order;
 import com.fakeshop.webapp.entity.Role;
 import com.fakeshop.webapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Collection;
 
 @Service
 public class UserServiceImpl implements UserService  {

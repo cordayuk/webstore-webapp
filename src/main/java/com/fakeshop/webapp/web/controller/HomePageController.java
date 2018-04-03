@@ -2,6 +2,7 @@ package com.fakeshop.webapp.web.controller;
 
 import com.fakeshop.webapp.entity.Product;
 import com.fakeshop.webapp.entity.User;
+import com.fakeshop.webapp.model.ShoppingCart;
 import com.fakeshop.webapp.service.ProductService;
 import com.fakeshop.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomePageController {
@@ -18,7 +21,7 @@ public class HomePageController {
     private UserService userService;
 
     @RequestMapping("/")
-    public String homepage(Model model){
+    public String homepage(Model model, HttpSession httpSession){
         Iterable<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "home";

@@ -31,4 +31,14 @@ public class OrderServiceImpl implements OrderService {
     public void delete(Order order) {
         orderDao.delete(order);
     }
+
+    @Override
+    public Iterable<Order> findAllUserOrders() {
+        return orderDao.findAllUserOrders();
+    }
+
+    @Override
+    public Order findSpecificUserOrder(Long id) {
+        return orderDao.findSpecificUserOrder(id);
+    }
 }
