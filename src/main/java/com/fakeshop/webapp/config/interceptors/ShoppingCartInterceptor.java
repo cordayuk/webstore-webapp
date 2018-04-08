@@ -14,6 +14,7 @@ public class ShoppingCartInterceptor extends HandlerInterceptorAdapter {
         if(session.getAttribute("cart") == null) {
             session.setAttribute("cart", new ShoppingCart());
         }
+
         return true;
     }
 }

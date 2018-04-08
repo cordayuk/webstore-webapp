@@ -20,10 +20,19 @@ public class HomePageController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("cart")
+    public ShoppingCart getSessionShoppingCart(HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        return cart;
+    }
+
     @RequestMapping("/")
     public String homepage(Model model, HttpSession httpSession){
         Iterable<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        if(model.containsAttribute("cart")){
+            System.out.println("cart in model");
+        }
         return "home";
     }
 

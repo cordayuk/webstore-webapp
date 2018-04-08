@@ -4,7 +4,6 @@ import com.fakeshop.webapp.entity.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static com.fakeshop.webapp.model.ShoppingCartProduct.createShoppingCartProduct;

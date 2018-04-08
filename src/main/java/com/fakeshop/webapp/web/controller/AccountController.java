@@ -1,16 +1,19 @@
 package com.fakeshop.webapp.web.controller;
 
 import com.fakeshop.webapp.entity.User;
+import com.fakeshop.webapp.model.ShoppingCart;
 import com.fakeshop.webapp.service.OrderService;
 import com.fakeshop.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 
@@ -20,6 +23,12 @@ public class AccountController {
     private UserService userService;
     @Autowired
     private OrderService orderService;
+
+    @ModelAttribute("cart")
+    public ShoppingCart getSessionShoppingCart(HttpSession session) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        return cart;
+    }
 
     @RequestMapping("/account")
     public String account(Model model){
