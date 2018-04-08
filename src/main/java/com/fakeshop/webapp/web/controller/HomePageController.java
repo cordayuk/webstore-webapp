@@ -30,9 +30,6 @@ public class HomePageController {
     public String homepage(Model model, HttpSession httpSession){
         Iterable<Product> products = productService.findAll();
         model.addAttribute("products", products);
-        if(model.containsAttribute("cart")){
-            System.out.println("cart in model");
-        }
         return "home";
     }
 
