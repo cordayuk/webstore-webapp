@@ -1,6 +1,7 @@
 package com.fakeshop.webapp.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Product {
@@ -15,6 +16,21 @@ public class Product {
     private byte[] picture;
 
     public Product() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return getId() == product.getId() &&
+                Objects.equals(getName(), product.getName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName());
     }
 
     public long getId() {
@@ -56,4 +72,6 @@ public class Product {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
+
+
 }

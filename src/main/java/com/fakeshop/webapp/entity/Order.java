@@ -19,31 +19,26 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private String[] deliveryAddress;
-    private String[] paymentAddress;
+    private String deliveryAddress;
+    private String paymentAddress;
     private LocalDateTime orderDate = LocalDateTime.now();
     private double cost;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.ALL})
     private List<OrderDetails> orderDetails = new ArrayList<OrderDetails>();
 
     public Order() {
     }
 
-    private Order(User user, String[] deliveryAddress, String[] paymentAddress, double cost) {
+    private Order(User user, String deliveryAddress, String paymentAddress, double cost) {
         this.user = user;
         this.deliveryAddress = deliveryAddress;
         this.paymentAddress = paymentAddress;
         this.cost = cost;
     }
 
-    public static Order createOrder(User user, String[] deliveryAddress, String[] paymentAddress, ShoppingCart shoppingCart){
+    public static Order createOrder(User user, String deliveryAddress, String paymentAddress, ShoppingCart shoppingCart){
         Order order = new Order(user, deliveryAddress, paymentAddress, shoppingCart.getTotalCost());
-        List<OrderDetails> details = new ArrayList<OrderDetails>();
-        for(ShoppingCartProduct scp : shoppingCart.getShoppingCart()){
-            details.add(createOrderDetails(order, scp.getProduct(), scp.getQuantity()));
-        }
-        order.setOrderDetails(details);
         return order;
     }
 
@@ -63,19 +58,19 @@ public class Order {
         this.user = user;
     }
 
-    public String[] getDeliveryAddress() {
+    public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String[] deliveryAddress) {
+    public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public String[] getPaymentAddress() {
+    public String getPaymentAddress() {
         return paymentAddress;
     }
 
-    public void setPaymentAddress(String[] paymentAddress) {
+    public void setPaymentAddress(String paymentAddress) {
         this.paymentAddress = paymentAddress;
     }
 

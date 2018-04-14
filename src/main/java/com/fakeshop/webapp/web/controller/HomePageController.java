@@ -65,10 +65,4 @@ public class HomePageController {
         return productService.findById(productId).getPicture();
     }
 
-    // TODO: CC - complete checkout page and function
-    @RequestMapping("/checkout")
-    public String checkout() {
-        return "checkout";
-    }
-
 }

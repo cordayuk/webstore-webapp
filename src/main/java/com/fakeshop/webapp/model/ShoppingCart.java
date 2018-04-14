@@ -4,12 +4,12 @@ import com.fakeshop.webapp.entity.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
-import static com.fakeshop.webapp.model.ShoppingCartProduct.createShoppingCartProduct;
-
 @Component
-public class ShoppingCart {
+public class ShoppingCart implements Collection<ShoppingCartProduct> {
 
     private List<ShoppingCartProduct> shoppingCart = new ArrayList<>();
 
@@ -27,33 +27,37 @@ public class ShoppingCart {
     public void addProduct(Product product, int quantity){
         boolean inCart = false;
         for(ShoppingCartProduct scp : shoppingCart){
-            if(scp.getProduct() == product){
+            if(scp.getProduct().equals(product)){
                 inCart = true;
                 scp.setQuantity(scp.getQuantity() + quantity);
-                break;
             }
         }
         if(!inCart){
-            shoppingCart.add(createShoppingCartProduct(product, quantity));
+            shoppingCart.add(ShoppingCartProduct.createShoppingCartProduct(product, quantity));
+        }
+
+    }
+
+    public void removeProduct(Product product) {
+        for(Iterator<ShoppingCartProduct> iterator = shoppingCart.iterator(); iterator.hasNext();){
+            ShoppingCartProduct scp = iterator.next();
+            if(scp.getProduct().equals(product)){
+                iterator.remove();
+            }
         }
     }
 
-    public void removeProduct(Product product, int quantity) throws Exception {
-        boolean inCart = false;
-        for(ShoppingCartProduct scp : shoppingCart){
-            if(scp.getProduct() == product){
-                inCart = true;
-                if(scp.getQuantity() - quantity <= 0){
-                    shoppingCart.remove(scp);
-                    break;
-                }else {
-                    scp.setQuantity(scp.getQuantity() - quantity);
-                    break;
+    public void updateProductQuantity(Product product, int quantity) {
+        for(Iterator<ShoppingCartProduct> iterator = shoppingCart.iterator(); iterator.hasNext();){
+            ShoppingCartProduct scp = iterator.next();
+            if(scp.getProduct().equals(product)){
+                if(quantity <= 0){
+                    iterator.remove();
+                }
+                else{
+                    scp.setQuantity(quantity);
                 }
             }
-        }
-        if(!inCart){
-            throw new Exception("Product not found");
         }
     }
 
@@ -63,5 +67,85 @@ public class ShoppingCart {
             totalCost += scp.getTotalPrice();
         }
         return totalCost;
+    }
+
+    @Override
+    public int size() {
+        return shoppingCart.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return shoppingCart.isEmpty();
+    }
+
+    public boolean contains(Product product){
+        for(ShoppingCartProduct scp : shoppingCart){
+            if(scp.getProduct() == product){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        if(o.getClass() == ShoppingCartProduct.class){
+            return shoppingCart.contains(o);
+        }
+        return false;
+    }
+
+    @Override
+    public Iterator<ShoppingCartProduct> iterator() {
+        return shoppingCart.iterator();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return shoppingCart.toArray();
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return shoppingCart.toArray(a);
+    }
+
+    @Override
+    public boolean add(ShoppingCartProduct shoppingCartProduct) {
+        return shoppingCart.add(shoppingCartProduct);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        if(o.getClass() == ShoppingCartProduct.class){
+            return shoppingCart.remove(o);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return shoppingCart.containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends ShoppingCartProduct> c) {
+        return shoppingCart.addAll(c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return shoppingCart.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return shoppingCart.retainAll(c);
+    }
+
+    @Override
+    public void clear() {
+        shoppingCart.clear();
     }
 }

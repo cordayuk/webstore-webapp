@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Shopping cart</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+    </tr>
+    <div th:each="product : ${cart}">
+        <form action="/cartupdate" method="post">
+        <td th:text="${product.productName}"></td>
+        <td><input type="number" th:value="${product.quantity}" min="0" name="quantity"></td>
+        <td th:text="${product.getTotalPrice()}"></td>
+        <td>
+            <input type="hidden" name="id" th:value="${product.product.id}"/>
+            <button type="submit">Update</button>
+        </td>
+        </form>
+        <td>
+            <form action="/cartremove" method="post">
+            <input type="hidden" name="id" th:value="${product.product.id}"/>
+            <button type="submit">Remove</button>
+            </form>
+        </td>
+    </div>
+    <a href="/checkout">Checkout</a>
+</table>
+</body>
+</html>

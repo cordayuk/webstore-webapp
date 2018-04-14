@@ -9,5 +9,10 @@
 <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
 <h2 th:text="|£${product.price}|"></h2>
 <p th:text="${product.description}"></p>
+<form action="/cartadd" method="post">
+    <input type="hidden" name="id" th:value="${product.id}"/>
+    <input type="number" value="1" min="1" name="quantity"/>
+    <button type="submit">Add to cart</button>
+</form>
 </body>
 </html>
