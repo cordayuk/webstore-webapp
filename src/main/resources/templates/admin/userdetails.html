@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>User Details</h1>
+<a th:href="@{|/admin/users/${user.id}/edit|}"><h2>Edit User</h2></a>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Not Expired</th>
+        <th>Not Locked</th>
+        <th>Enabled</th>
+    </tr>
+    <tr>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.role.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.getNonExpired()}"></td>
+        <td th:text="${user.getNonLocked()}"></td>
+        <td th:text="${user.getEnabled()}"></td>
+    </tr>
+</table>
+<h2>Users Orders</h2>
+<table>
+    <th>Date</th>
+    <th>Items</th>
+    <th>Cost</th>
+    <div th:each="order : ${orders}">
+        <tr>
+            <td th:text="${order.orderDate}"></td>
+            <td>
+                <div th:each="productDetail : ${order.orderDetails}">
+                    <li th:text="${productDetail.product.name}"></li>
+                </div>
+            </td>
+            <td th:text="|£${order.cost}|"></td>
+            <td><a th:href="|/admin/order/${order.id}|">Details</a></td>
+        </tr>
+    </div>
+</table>
+</body>
+</html>

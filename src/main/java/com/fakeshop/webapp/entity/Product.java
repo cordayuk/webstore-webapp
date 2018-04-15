@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 public class Product {
 
+    //TODO: cc - add boolean value to show if product has been discontinued. If product deleted probably will mess up orders
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

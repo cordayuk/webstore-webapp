@@ -6,6 +6,13 @@
 </head>
 <body>
 <h1 th:text="${product.name}"></h1>
+<div th:if="${admin == true}">
+    <a th:href="|/admin/products/${product.id}/edit|"><h2>Edit</h2></a>
+    <a th:href="|/admin/products/${product.id}/delete|"><h2>Delete</h2></a>
+    <form th:action="|/admin/products/${product.id}/delete|" method="post">
+        <button type="submit">Delete Product</button>
+    </form>
+</div>
 <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
 <h2 th:text="|£${product.price}|"></h2>
 <p th:text="${product.description}"></p>

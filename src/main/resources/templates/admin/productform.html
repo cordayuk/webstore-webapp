@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Add a Product</h1>
+<h1 th:text="|${heading} Product|"></h1>
 <form th:action="@{${action}}" th:object="${product}" method="post" enctype="multipart/form-data">
     <div class="container">
         <input type="hidden" th:field="*{id}"/>
@@ -23,7 +23,7 @@
         <label><b>Price</b></label>
         <input type="number" step="0.01" min="0" th:field="*{price}"/>
 
-        <button type="submit">Login</button>
+        <button type="submit" th:text="${heading}"></button>
     </div>
 </form>
 

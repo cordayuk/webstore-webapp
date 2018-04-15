@@ -56,10 +56,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean createOrder(ShoppingCart cart, User user, String deliveryAddress, String paymentAddress) {
         if(!cart.isEmpty()) {
-
-                Order order = new Order();
-                order = Order.createOrder(user, deliveryAddress, paymentAddress, cart);
-                List<OrderDetails> details = new ArrayList<OrderDetails>();
+                Order order = Order.createOrder(user, deliveryAddress, paymentAddress, cart);
+                List<OrderDetails> details = new ArrayList<>();
                 for(ShoppingCartProduct scp : cart){
                     OrderDetails orderDetails = createOrderDetails(order, scp.getProduct(), scp.getQuantity());
                     details.add(orderDetails);
@@ -70,5 +68,10 @@ public class OrderServiceImpl implements OrderService {
 
         }
         return false;
+    }
+
+    @Override
+    public Iterable<Order> findAllOrdersByUserId(Long id) {
+        return orderDao.findOrdersByUserId(id);
     }
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Edit User</h1>
+<form action="/admin/users/edit" th:object="${user}" method="post">
+    <div class="container">
+        <input type="hidden" th:field="*{id}"/>
+
+        <label><b>Email</b></label>
+        <input type="text" placeholder="Email" name="email" th:field="*{email}"required />
+
+        <label><b>Name</b></label>
+        <input type="text" placeholder="Name" name="name" th:field="*{name}"required />
+
+        <label><b>Role</b></label>
+        <select name="roleId" size="2">
+            <div th:if="*{role.id} == 2">
+                <option selected value="2">Admin</option>
+                <option value="1">Customer</option>
+            </div>
+
+            <div th:if="*{role.id} == 1">
+                <option value="2" >Admin</option>
+                <option selected value="1">Customer</option>
+            </div>
+        </select>
+
+        <label><b>Not Expired</b></label>
+        <select name="nonExpired" size="2">
+            <div th:if="${user.getNonExpired()} == true">
+                <option selected value=true>True</option>
+                <option  value=false>False</option>
+            </div>
+
+            <div th:if="${user.getNonExpired()} == false">
+                <option  value=true>True</option>
+                <option selected value=false>False</option>
+            </div>
+        </select>
+
+        <label><b>Not Locked</b></label>
+        <select name="nonLocked" size="2">
+            <div th:if="${user.getNonLocked()} == true">
+                <option selected value=true>True</option>
+                <option  value=false>False</option>
+            </div>
+
+            <div th:if="${user.getNonLocked()} == false">
+                <option  value=true>True</option>
+                <option selected value=false>False</option>
+            </div>
+        </select>
+
+        <label><b>Enabled</b></label>
+        <select name="enabled" size="2">
+            <div th:if="${user.getEnabled()} == true">
+                <option selected value=true>True</option>
+                <option value=false>False</option>
+            </div>
+
+            <div th:if="${user.getEnabled()} == false">
+                <option value=true>True</option>
+                <option selected value=false>False</option>
+            </div>
+        </select>
+
+        <button type="submit">Edit</button>
+    </div>
+</form>
+</body>
+</html>

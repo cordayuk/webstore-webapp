@@ -13,4 +13,7 @@ public interface OrderDao extends CrudRepository<Order, Long> {
 
     @Query("select t from Order t where t.user.id=:#{principal.id} and t.id = :orderId")
     Order findSpecificUserOrder(@Param("orderId") Long orderId);
+
+    @Query("select t from Order t where t.user.id = :userId")
+    Iterable<Order> findOrdersByUserId(@Param("userId") Long userId);
 }

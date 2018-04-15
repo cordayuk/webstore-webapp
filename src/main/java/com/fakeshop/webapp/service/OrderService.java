@@ -15,4 +15,5 @@ public interface OrderService {
     Iterable<Order> findAllUserOrders();
     Order findSpecificUserOrder(Long id);
     boolean createOrder(ShoppingCart cart, User user, String deliveryAddress, String paymentAddress);
+    Iterable<Order> findAllOrdersByUserId(Long id);
 }

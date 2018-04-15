@@ -2,8 +2,10 @@ package com.fakeshop.webapp.web.controller;
 
 import com.fakeshop.webapp.dao.OrderDao;
 import com.fakeshop.webapp.entity.Product;
+import com.fakeshop.webapp.entity.User;
 import com.fakeshop.webapp.service.OrderService;
 import com.fakeshop.webapp.service.ProductService;
+import com.fakeshop.webapp.service.RoleService;
 import com.fakeshop.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
+
 @Controller
 public class AdminController {
     @Autowired
@@ -22,12 +26,12 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RoleService roleService;
 
     // Admin Homepage
     @RequestMapping("/admin")
-    public String adminHome(Model model){
-
-
+    public String adminHome(){
         return "admin/home";
     }
 
@@ -43,6 +47,7 @@ public class AdminController {
     @RequestMapping("/admin/products/{productId}")
     public String productDetails(@PathVariable Long productId, Model model){
         Product product = productService.findById(productId);
+        model.addAttribute("admin", true);
         model.addAttribute("product", product);
         return "shared/product";
     }
@@ -53,9 +58,10 @@ public class AdminController {
         if(!model.containsAttribute("product")){
             model.addAttribute("product", new Product());
             model.addAttribute("action", "/admin/products/add");
+            model.addAttribute("heading", "Add");
         }
         // action must post to /admin/products/add
-        return "admin/form";
+        return "admin/productform";
     }
 
     //receive add product form
@@ -71,11 +77,12 @@ public class AdminController {
     public String editProduct(@PathVariable Long productId, Model model) {
         if(!model.containsAttribute("product")){
             model.addAttribute("product", productService.findById(productId));
+            model.addAttribute("heading", "Edit");
         }
         //action to post to /admin/products/{productId}/edit
-        return "admin/form";
+        return "admin/productform";
     }
-    //receive edit product form
+    //receive edit product form - might not need at all. works if form is passed to product add
     @RequestMapping(value = "/admin/products/{productId}/edit", method = RequestMethod.POST)
     public String updateProduct(@PathVariable Long productId, Product product, MultipartFile file) {
         productService.save(product, file);
@@ -85,11 +92,14 @@ public class AdminController {
 
     //delete a product
     @RequestMapping(value = "/admin/products/{productId}/delete", method = RequestMethod.POST)
-    public String deleteAllProducts(@PathVariable Long productId){
-        Product product = productService.findById(productId);
-        productService.delete(product);
+    public String deleteAllProducts(@PathVariable Long productId, Principal principal){
+        User user = userService.getCurrentUser(principal);
+        if(user.getRole().getName().equals("ROLE_ADMIN")) {
+            Product product = productService.findById(productId);
+            productService.delete(product);
+        }
 
-        return "redirect:/admin/allproducts";
+        return "redirect:/admin/products";
     }
 
     //view all orders
@@ -102,8 +112,54 @@ public class AdminController {
     //View order details
     @RequestMapping("/admin/order/{orderId}")
     public String orderDetail(@PathVariable Long orderId, Model model) {
-        model.addAttribute("order", orderService.findById(orderId));
+        model.addAttribute("order", orderService.findById(orderId).get());
 
         return "shared/orderdetail";
+    }
+
+    // view all users
+    @RequestMapping("/admin/users")
+    public String users(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "admin/users";
+    }
+
+    //View User details
+    @RequestMapping("/admin/users/{userId}")
+    public String userDetails(@PathVariable Long userId, Model model) {
+        User user = userService.findById(userId);
+        if(user != null){
+            model.addAttribute("user", user);
+            model.addAttribute("orders", orderService.findAllOrdersByUserId(user.getId()));
+            return "admin/userdetails";
+        }
+        else
+            return "redirect:/admin/users";
+    }
+
+    //edit user details
+    @RequestMapping("/admin/users/{userId}/edit")
+    public String editUser(@PathVariable Long userId, Model model) {
+        User user = userService.findById(userId);
+        if(user != null){
+            model.addAttribute("user", user);
+            return "admin/userform";
+        }
+        else
+            return "redirect:/admin/users";
+    }
+
+    //Receive edit details
+    @RequestMapping(value = "/admin/users/edit", method = RequestMethod.POST)
+    public String editUserPost(User user, @RequestParam Long roleId, @RequestParam boolean nonExpired, @RequestParam boolean nonLocked, @RequestParam boolean enabled) {
+
+        user.setRole(roleService.findById(roleId));
+        user.setNonExpired(nonExpired);
+        user.setNonLocked(nonLocked);
+        user.setEnabled(enabled);
+
+        userService.save(user);
+
+        return String.format("redirect:/admin/users/%s", user.getId());
     }
 }

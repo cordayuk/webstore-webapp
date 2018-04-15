@@ -6,5 +6,29 @@
 </head>
 <body>
 <h1>admin orders</h1>
+<table>
+    <tr>
+        <th>Order Id</th>
+        <th>Date</th>
+        <th>User</th>
+        <th>Value</th>
+    </tr>
+    <div th:each="order : ${orders}">
+        <tr>
+            <td>
+                <a th:href="|/admin/order/${order.id}|">
+                    <p th:text="${order.id}"></p>
+                </a>
+            </td>
+            <td th:text="${order.orderDate}"></td>
+            <td>
+                <a th:href="|/admin/users/${order.user.id}|">
+                    <p th:text="${order.user.email}"></p>
+                </a>
+            </td>
+            <td th:text="${order.cost}"></td>
+        </tr>
+    </div>
+</table>
 </body>
 </html>

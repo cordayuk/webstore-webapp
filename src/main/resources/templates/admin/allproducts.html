@@ -5,6 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>All products page</h1>
+<h1>All products Page</h1>
+<a href="/admin/products/add"><h2>Add a product</h2></a>
+<ol>
+    <div th:each="product : ${products}">
+        <li>
+            <a th:href="@{|/admin/products/${product.id}|}">
+                <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
+                <label th:text="${product.name}"></label>
+                <b th:text="|£${product.price}|"></b>
+            </a>
+        </li>
+    </div>
+</ol>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Iterator;
 
 @Service
 public class UserServiceImpl implements UserService  {
@@ -29,14 +30,13 @@ public class UserServiceImpl implements UserService  {
 
     @Override
     public void saveNewCustomer(User user) {
-        User newCustomer = user;
-        newCustomer.setEnabled(true);
-        newCustomer.setNonExpired(true);
-        newCustomer.setNonLocked(true);
+        user.setEnabled(true);
+        user.setNonExpired(true);
+        user.setNonLocked(true);
         Role customerRole = roleDao.findById(1L).get();
-        newCustomer.setRole(customerRole);
-        newCustomer.setPassword(BCrypt.hashpw(newCustomer.getPassword(), BCrypt.gensalt()));
-        save(newCustomer);
+        user.setRole(customerRole);
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        save(user);
     }
 
     @Override
@@ -53,6 +53,17 @@ public class UserServiceImpl implements UserService  {
     @Override
     public User getCurrentUser(Principal principal) {
         return findByEmail(principal.getName());
+    }
+
+    @Override
+    public User findById(Long id) {
+
+        return userDao.findById(id).get();
+    }
+
+    @Override
+    public Iterable<User> getAllUsers() {
+        return userDao.findAll();
     }
 
     @Override
