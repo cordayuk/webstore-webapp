@@ -1,13 +1,11 @@
 package com.fakeshop.webapp.entity;
 
 import com.fakeshop.webapp.model.ShoppingCart;
-import com.fakeshop.webapp.model.ShoppingCartProduct;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static com.fakeshop.webapp.entity.OrderDetails.createOrderDetails;
 
 @Entity
 @Table(name = "order_table")

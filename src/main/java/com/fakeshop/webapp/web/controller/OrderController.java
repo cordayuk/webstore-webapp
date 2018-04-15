@@ -25,8 +25,13 @@ public class OrderController {
         if(principal == null){
             return "login";
         }
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        if(cart.isEmpty()){
+            return "redirect:/";
+        }
+
         model.addAttribute("user", userService.getCurrentUser(principal));
-        model.addAttribute("cart", session.getAttribute("cart"));
+        model.addAttribute("cart", cart);
 
         return "checkout";
     }
@@ -35,7 +40,7 @@ public class OrderController {
     public String checkoutPost(HttpSession session, Principal principal, @RequestParam String deliveryAddress, @RequestParam String paymentAddress) {
 
         orderService.createOrder((ShoppingCart) session.getAttribute("cart"), userService.getCurrentUser(principal), deliveryAddress, paymentAddress);
-
+        session.removeAttribute("cart");
         return "redirect:/account/orders";
     }
 }

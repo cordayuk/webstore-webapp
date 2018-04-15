@@ -70,4 +70,8 @@ public class OrderDetails {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public double getTotalPrice(){
+        return price * quantity;
+    }
 }

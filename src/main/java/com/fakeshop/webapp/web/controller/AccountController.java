@@ -1,5 +1,6 @@
 package com.fakeshop.webapp.web.controller;
 
+import com.fakeshop.webapp.entity.Order;
 import com.fakeshop.webapp.entity.User;
 import com.fakeshop.webapp.model.ShoppingCart;
 import com.fakeshop.webapp.service.OrderService;
@@ -8,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.Optional;
 
 
 @Controller
@@ -42,34 +41,43 @@ public class AccountController {
     }
 
     @RequestMapping("/account/orders/{orderId}")
-    public String orderDetails(@PathVariable Long orderId, Model model) {
-        model.addAttribute("order", orderService.findSpecificUserOrder(orderId));
-        return "shared/orderdetail";
+    public String orderDetails(@PathVariable Long orderId, Model model, Principal principal) {
+        User currentUser = userService.getCurrentUser(principal);
+        Optional<Order> order = orderService.findById(orderId);
+        if(order.isPresent()) {
+            if(order.get().getUser().equals(currentUser)) {
+                model.addAttribute("order", orderService.findSpecificUserOrder(orderId));
+                return "shared/orderdetail";
+            }
+            else
+                return "redirect:/account/orders";
+        }
+        else
+            return "redirect:/account/orders";
     }
 
     @RequestMapping("account/details")
-    public String details(Principal principal) {
+    public String details(Principal principal, Model model) {
         User user = userService.getCurrentUser(principal);
+        model.addAttribute("user", user);
         return "customer/details";
     }
 
-    @RequestMapping("account/details/edit")
-    public String editDetailsForm(Model model, Principal principal){
-        if(!model.containsAttribute("user")){
-            model.addAttribute("user", userService.getCurrentUser(principal));
-        }
-        return "customer/form";
-    }
-
     @RequestMapping(value = "/account/details/edit", method = RequestMethod.POST)
-    public String editDetails(User user) {
-        userService.save(user);
+    public String editDetails(@RequestParam Long id, @RequestParam String name, Principal principal) {
+        User user = userService.getCurrentUser(principal);
+        if(user.getId() == id){
+            user.setName(name);
+            userService.save(user);
+        }
         return "redirect:/account";
     }
 
     @RequestMapping(value = "/account/details/delete", method = RequestMethod.POST)
     public String deleteUser(Principal principal, Authentication authentication){
-        userService.delete(userService.getCurrentUser(principal));
+        User user = userService.getCurrentUser(principal);
+        user.setEnabled(false);
+        userService.save(user);
         authentication.setAuthenticated(false);
         return "redirect:/";
     }

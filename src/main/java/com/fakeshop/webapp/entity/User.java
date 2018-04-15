@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User implements UserDetails{
@@ -128,5 +129,23 @@ public class User implements UserDetails{
 
     public void setEnabled(Boolean enabled) {
         isEnabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId() == user.getId() &&
+                Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getRole(), user.getRole()) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getPassword(), user.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getEmail(), getRole(), getName(), getPassword());
     }
 }

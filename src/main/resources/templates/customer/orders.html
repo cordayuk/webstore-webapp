@@ -5,6 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>customers orders</h1>
+<h1>Your Orders</h1>
+<table>
+    <th>Date</th>
+    <th>Items</th>
+    <th>Cost</th>
+    <div th:each="order : ${orders}">
+        <tr>
+        <td th:text="${order.orderDate}"></td>
+        <td>
+            <div th:each="productDetail : ${order.orderDetails}">
+                <li th:text="${productDetail.product.name}"></li>
+            </div>
+        </td>
+        <td th:text="|£${order.cost}|"></td>
+        <td><a th:href="|/account/orders/${order.id}|">Details</a></td>
+        </tr>
+    </div>
+</table>
 </body>
 </html>

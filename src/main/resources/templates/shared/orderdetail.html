@@ -5,6 +5,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Shared order detail</h1>
+<h1>Order Detail</h1>
+<h2>Date</h2>
+<p th:text="${order.orderDate}"></p>
+<h2>Delivery Address</h2>
+<p th:text="${order.deliveryAddress}"></p>
+<h2>Payment Address</h2>
+<p th:text="${order.paymentAddress}"></p>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+    </tr>
+    <div th:each="orderDetails : ${order.orderDetails}">
+        <tr>
+            <td th:text="${orderDetails.product.name}"></td>
+            <td th:text="${orderDetails.quantity}"></td>
+            <td th:text="${orderDetails.getTotalPrice()}"></td>
+        </tr>
+    </div>
+</table>
+<h2>Total Cost</h2>
+<p th:text="${order.cost}"></p>
 </body>
 </html>

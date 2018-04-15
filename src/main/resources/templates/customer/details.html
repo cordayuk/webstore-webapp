@@ -5,6 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>customer details</h1>
+<h1>Customer Details</h1>
+<form method="post" action="/account/details/edit">
+    <input type="hidden" th:field="${user.id}" name="id"/>
+    <h2>Name</h2>
+    <input type="text" th:field="${user.name}" name="name"/>
+    <button type="submit">Edit</button>
+</form>
+<form method="post" action="/account/details/delete">
+    <button type="submit">Delete Account</button>
+</form>
 </body>
 </html>
