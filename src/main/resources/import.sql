@@ -1,4 +1,4 @@
-insert into Product(id, name, description, price, picture) values(1, 'Phone', 'This is a phone', 2.99, null);
+insert into Product(id, name, description, price, picture, FOR_SALE) values(1, 'Phone', 'This is a phone', 2.99, null, true);
 
 insert into Role(name) values ('ROLE_CUSTOMER'), ('ROLE_ADMIN');
 

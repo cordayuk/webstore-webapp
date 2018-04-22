@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title th:text="${product.name}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <h1 th:text="${product.name}"></h1>
-<div th:if="${admin == true}">
+<div sec:authorize="hasRole('ROLE_ADMIN')">
     <a th:href="|/admin/products/${product.id}/edit|"><h2>Edit</h2></a>
-    <a th:href="|/admin/products/${product.id}/delete|"><h2>Delete</h2></a>
+    <h2>Remove From Sale</h2>
     <form th:action="|/admin/products/${product.id}/delete|" method="post">
-        <button type="submit">Delete Product</button>
+        <button type="submit">Remove From Sale</button>
     </form>
 </div>
 <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>

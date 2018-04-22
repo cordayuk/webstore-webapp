@@ -16,6 +16,7 @@ public class Product {
     private double price;
     @Lob
     private byte[] picture;
+    private boolean forSale;
 
     public Product() {
     }
@@ -75,5 +76,11 @@ public class Product {
         this.picture = picture;
     }
 
+    public boolean isForSale() {
+        return forSale;
+    }
 
+    public void setForSale(boolean forSale) {
+        this.forSale = forSale;
+    }
 }

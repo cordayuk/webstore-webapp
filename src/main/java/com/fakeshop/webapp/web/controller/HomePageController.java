@@ -28,7 +28,7 @@ public class HomePageController {
 
     @RequestMapping("/")
     public String homepage(Model model, HttpSession httpSession){
-        Iterable<Product> products = productService.findAll();
+        Iterable<Product> products = productService.findByForSaleTrue();
         model.addAttribute("products", products);
         return "home";
     }

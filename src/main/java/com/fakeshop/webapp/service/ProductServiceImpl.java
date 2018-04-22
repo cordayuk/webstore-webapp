@@ -33,6 +33,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void save(Product product) {
+        productDao.save(product);
+    }
+
+    @Override
     public void delete(Product product) {
         productDao.delete(product);
     }
@@ -40,6 +45,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteAll() {
         productDao.deleteAll();
+    }
+
+    @Override
+    public Iterable<Product> findByForSaleTrue() {
+        return productDao.findByForSaleTrue();
     }
 
 

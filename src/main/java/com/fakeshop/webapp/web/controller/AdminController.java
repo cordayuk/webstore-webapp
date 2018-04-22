@@ -92,11 +92,12 @@ public class AdminController {
 
     //delete a product
     @RequestMapping(value = "/admin/products/{productId}/delete", method = RequestMethod.POST)
-    public String deleteAllProducts(@PathVariable Long productId, Principal principal){
+    public String removeProductForSale(@PathVariable Long productId, Principal principal){
         User user = userService.getCurrentUser(principal);
         if(user.getRole().getName().equals("ROLE_ADMIN")) {
             Product product = productService.findById(productId);
-            productService.delete(product);
+            product.setForSale(false);
+            productService.save(product);
         }
 
         return "redirect:/admin/products";
