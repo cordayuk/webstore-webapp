@@ -1,12 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+
 <h1>Hello there this is the home page</h1>
-<ol>
+<ul>
 <div th:each="product : ${products}">
     <li>
         <a th:href="@{|/${product.id}|}">
@@ -16,6 +21,6 @@
         </a>
     </li>
 </div>
-</ol>
+</ul>
 </body>
 </html>
