@@ -16,17 +16,19 @@
 <ul class="product-list">
     <div th:each="product : ${products}">
         <div class="product-container">
-            <li class="product">
-                <div class="product-contents">
-                    <a th:href="@{|/${product.id}|}">
-                    <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
-                    <span class="product-text">
-                        <label th:text="${product.name}"></label>
-                        <b th:text="|£${product.price}|"></b>
-                    </span>
-                    </a>
-                </div>
-            </li>
+            <a th:href="@{|/${product.id}|}">
+                <li class="product">
+                    <div class="product-contents">
+
+                        <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}" width="200" height="200"/>
+                        <span class="product-text">
+                            <label th:text="${product.name}"></label>
+                            <b th:text="|£${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}|"></b>
+                        </span>
+
+                    </div>
+                </li>
+            </a>
         </div>
 </div>
 </div>
