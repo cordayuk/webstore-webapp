@@ -1,32 +1,46 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Order Details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
 <body>
-<h1>Order Detail</h1>
-<h2>Date</h2>
-<p th:text="${order.orderDate}"></p>
-<h2>Delivery Address</h2>
-<p th:text="${order.deliveryAddress}"></p>
-<h2>Payment Address</h2>
-<p th:text="${order.paymentAddress}"></p>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Cost</th>
-    </tr>
-    <div th:each="orderDetails : ${order.orderDetails}">
-        <tr>
-            <td th:text="${orderDetails.product.name}"></td>
-            <td th:text="${orderDetails.quantity}"></td>
-            <td th:text="${orderDetails.getTotalPrice()}"></td>
-        </tr>
+<div class="container">
+    <h1>Order Details</h1>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <h2>User</h2>
+        <span th:text="${order.user.email}"></span>
     </div>
-</table>
-<h2>Total Cost</h2>
-<p th:text="${order.cost}"></p>
+    <h2>Date</h2>
+    <span th:text="${order.orderDate}"></span>
+    <h2>Delivery Address</h2>
+    <span th:text="${order.deliveryAddress}"></span>
+    <h2>Payment Address</h2>
+    <span th:text="${order.paymentAddress}"></span>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+        </tr>
+        <div th:each="orderDetails : ${order.orderDetails}">
+            <tr>
+                <td th:text="${orderDetails.product.name}"></td>
+                <td th:text="${orderDetails.quantity}"></td>
+                <td th:text="|£${orderDetails.getTotalPrice()}|"></td>
+            </tr>
+        </div>
+        <tr>
+            <td></td>
+            <td><b>Total Price:</b></td>
+            <td th:text="|£${order.cost}|"></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

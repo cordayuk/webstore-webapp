@@ -1,27 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>My Orders</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Your Orders</h1>
-<table>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
+<h1>My Orders</h1>
+    <table>
     <th>Date</th>
     <th>Items</th>
     <th>Cost</th>
+    <th></th>
     <div th:each="order : ${orders}">
         <tr>
-        <td th:text="${order.orderDate}"></td>
-        <td>
-            <div th:each="productDetail : ${order.orderDetails}">
-                <li th:text="${productDetail.product.name}"></li>
-            </div>
-        </td>
-        <td th:text="|£${order.cost}|"></td>
-        <td><a th:href="|/account/orders/${order.id}|">Details</a></td>
+            <td th:text="${order.orderDate}"></td>
+            <td>
+                <ul>
+                    <div th:each="productDetail : ${order.orderDetails}">
+                        <li th:text="${productDetail.product.name}"></li>
+                    </div>
+                </ul>
+            </td>
+            <td th:text="|£${order.cost}|"></td>
+            <td><a th:href="|/account/orders/${order.id}|" class="link-button">Details</a></td>
         </tr>
     </div>
 </table>
+</div>
 </body>
 </html>

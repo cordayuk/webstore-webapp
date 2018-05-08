@@ -3,23 +3,30 @@
 <head>
     <title>Users</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Users</h1>
-<table>
-    <tr>
-        <th>User Id</th>
-        <th>Email</th>
-        <th>Role</th>
-    </tr>
-    <div th:each="user : ${users}">
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
+    <h1>Users</h1>
+    <table>
         <tr>
-            <td th:text="${user.id}"></td></a>
-            <td th:text="${user.email}"></td></a>
-            <td th:text="${user.role.name}"></td></a>
-            <td><a th:href="@{|/admin/users/${user.getId()}|}">Details</a></td>
+            <th>User Id</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th></th>
         </tr>
-    </div>
-</table>
+        <div th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.id}"></td></a>
+                <td th:text="${user.email}"></td></a>
+                <td th:text="${user.role.name}"></td></a>
+                <td><a th:href="@{|/admin/users/${user.getId()}|}" class="link-button">Details</a></td>
+            </tr>
+        </div>
+    </table>
+</div>
 </body>
 </html>

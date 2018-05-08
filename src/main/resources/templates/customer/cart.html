@@ -1,35 +1,49 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Shopping Cart</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Shopping cart</h1>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Cost</th>
-    </tr>
-    <div th:each="product : ${cart}">
-        <form action="/cartupdate" method="post">
-        <td th:text="${product.productName}"></td>
-        <td><input type="number" th:value="${product.quantity}" min="0" name="quantity"></td>
-        <td th:text="${product.getTotalPrice()}"></td>
-        <td>
-            <input type="hidden" name="id" th:value="${product.product.id}"/>
-            <button type="submit">Update</button>
-        </td>
-        </form>
-        <td>
-            <form action="/cartremove" method="post">
-            <input type="hidden" name="id" th:value="${product.product.id}"/>
-            <button type="submit">Remove</button>
-            </form>
-        </td>
-    </div>
-    <a href="/checkout">Checkout</a>
-</table>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <div th:each="product : ${cart}">
+            <tr>
+                <form action="/cartupdate" method="post">
+                <td th:text="${product.productName}"></td>
+                <td><input type="number" th:value="${product.quantity}" min="0" name="quantity"></td>
+                <td th:text="|£${product.getTotalPrice()}|"></td>
+                <td>
+                    <input type="hidden" name="id" th:value="${product.product.id}"/>
+                    <button type="submit">Update</button>
+                </td>
+                </form>
+                <td>
+                    <form action="/cartremove" method="post">
+                    <input type="hidden" name="id" th:value="${product.product.id}"/>
+                    <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        </div>
+        <td></td>
+        <td><b>Total Cost:</b></td>
+        <td th:text="|£${cart.getTotalCost()}|"></td>
+        <a href="/checkout" class="link-button">Checkout</a>
+    </table>
+</div>
 </body>
 </html>

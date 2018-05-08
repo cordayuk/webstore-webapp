@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Login to your Account</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <form th:action="@{/login}" method="post">
     <div class="container">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-
+        <h1>Example.com</h1>
+        <label><b>E-Mail</b></label>
+        <div class="input-container">
+            <input type="text" placeholder="Enter Username" name="username" required>
+        </div>
         <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-
-        <button type="submit">Login</button>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
+        <div class="input-container">
+            <input type="password" placeholder="Enter Password" name="password" required>
+        </div>
+        <div class="button-container">
+            <button type="submit">Login</button>
+        </div>
     </div>
 </form>
 </body>

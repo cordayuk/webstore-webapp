@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+      <link rel="stylesheet" type="text/css" th:href="@{static/css/main.css}" />
+      <link rel="stylesheet" type="text/css" th:href="@{static/css/fontawesome/css/font-awesome.min.css}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+     <div class="fixed-navbar" th:fragment="nav-bar">
+       <nav>
+               <a href="/" class="logo"><b>Xample.com</b></a>
+             <ul>
+               <div class="nav-buttons">
+                   <div class="cart-logo">
+                       <li class="nav-button"><a href="/cart"><i class="fa fa-shopping-cart"></i></a></li>
+                   </div>
+                 <div sec:authorize="hasRole('ROLE_ADMIN')">
+                     <li class="nav-button"><a href="/logout">Logout</a></li>
+                     <li class="nav-button"><a href="/admin">Admin</a></li>
+                 </div>
+                 <div sec:authorize="hasRole('ROLE_CUSTOMER')">
+                     <li class="nav-button"><a href="/logout">Logout</a></li>
+                     <li class="nav-button"><a href="/account" sec:authentication="name"></a></li>
+                 </div>
+                 <div sec:authorize="isAnonymous()">
+                     <li class="nav-button"><a href="/login">Login</a></li>
+                     <li class="nav-button"><a href="/signup">Sign Up</a></li>
+                 </div>
+               </div>
+           </ul>
+       </nav>
+     <div class="buffer"></div>
+     </div>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+body {
+    margin: 0px;
+}
+
+
+.fixed-navbar nav {
+    position: fixed;
+    top: 0;
+    background-color: #333333;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.fixed-navbar .logo{
+    display: block;
+    font-size: 40px;
+    float: left;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    color: white;
+
+}
+
+.fixed-navbar ul {
+    list-style-type: none;
+}
+
+.fixed-navbar li {
+    float: right;
+}
+
+.fixed-navbar .nav-buttons a {
+    display: block;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    padding: 20px 16px;
+}
+
+.fixed-navbar a:hover {
+    background-color: #0d0d0d;
+}
+
+.fixed-navbar .buffer {
+    width: 100%;
+    height: 87px;
+}
+
+.product-list-container {
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.product-list-container .product-list {
+    list-style-type: none;
+}
+
+.product-container {
+
+}
+
+.product-list-container .product-list li {
+    float: left;
+    width: 200px;
+    height: 250px;
+    margin: 20px;
+    border: 1px solid #ccc;
+}
+
+.product-list-container .product-list li:hover {
+    border: 1px solid #777;
+}
+
+
+.product-list-container .product-list .product .product-contents {
+    display: inline-block;
+    vertical-align: center;
+    text-align: center;
+}
+
+.product-contents a {
+    text-decoration: none;
+}
+.product-contents img {
+    height: 100%;
+    width: 100%;
+}
+
+.product-text {
+    font-size: 20px;
+    color: black;
+}
+
+.product-details-container {
+    text-align: center;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
+.product-details-container img {
+    float: left;
+}
+
+.product-details-container .details{
+    display: inline;
+    text-align: center;
+}
+
+.number-input {
+    width: 40px;
+}
+
+.link-button {
+    color: white;
+    background-color: #333333;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 15px 32px;
+    display: inline-block;
+    margin: 5px;
+}
+
+.admin-options {
+
+    text-align: center;
+    margin: 10px;
+}
+.container {
+    text-align: center;
+}
+
+table {
+    width: 60%;
+    margin-left:20%;
+    margin-right:20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+
+}
+
+th {
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #333333;
+    color: white;
+}
+
+table td {
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.checkout-table {
+    text-align: center;
+
+}
+
+.addresses {
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+    align: center;
+
+}
+
+.addresses .deliver-address {
+    float: left;
+    display: inline-block;
+    margin: 5px;
+}
+
+.addresses .payment-address {
+    float: left;
+    display: inline-block;
+    margin: 5px;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+

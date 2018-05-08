@@ -1,34 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Orders</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>admin orders</h1>
-<table>
-    <tr>
-        <th>Order Id</th>
-        <th>Date</th>
-        <th>User</th>
-        <th>Value</th>
-    </tr>
-    <div th:each="order : ${orders}">
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
+    <h1>Orders</h1>
+    <table>
         <tr>
-            <td>
-                <a th:href="|/admin/order/${order.id}|">
-                    <p th:text="${order.id}"></p>
-                </a>
-            </td>
-            <td th:text="${order.orderDate}"></td>
-            <td>
-                <a th:href="|/admin/users/${order.user.id}|">
-                    <p th:text="${order.user.email}"></p>
-                </a>
-            </td>
-            <td th:text="${order.cost}"></td>
+            <th>Order Id</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Value</th>
         </tr>
-    </div>
-</table>
+        <div th:each="order : ${orders}">
+            <tr>
+                <td>
+                    <a th:href="|/admin/order/${order.id}|">
+                        <p th:text="${order.id}"></p>
+                    </a>
+                </td>
+                <td th:text="${order.orderDate}"></td>
+                <td>
+                    <a th:href="|/admin/users/${order.user.id}|">
+                        <p th:text="${order.user.email}"></p>
+                    </a>
+                </td>
+                <td th:text="${order.cost}"></td>
+            </tr>
+        </div>
+    </table>
+</div>
 </body>
 </html>

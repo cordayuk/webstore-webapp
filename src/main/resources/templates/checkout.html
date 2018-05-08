@@ -1,28 +1,49 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Checkout</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<form action="/checkout" method="post">
-<h1>Checkout</h1>
-    <p th:text="|Hello! ${user.name}, please confirm your details and order before checkout.|"></p>
-<h2>Delivery Address</h2>
-    <input type="text" name="deliveryAddress"/>
-<h2>Payment Address</h2>
-    <input type="text" name="paymentAddress"/>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+    <div class="container">
+        <form action="/checkout" method="post">
 
-<div th:each="product : ${cart}">
+        <h1>Checkout</h1>
+            <p th:text="|Hello! ${user.name}, please confirm your details and order before checkout.|"></p>
+        <div class="addresses">
+            <div class="deliver-address">
+                <h2>Delivery Address</h2>
+                <input type="text" name="deliveryAddress"/>
+            </div>
+            <div class="payment-address">
+                <h2>Payment Address</h2>
+                <input type="text" name="paymentAddress"/>
+            </div>
+        </div>
+        <div class="checkout-table">
+            <table>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
 
-        <td th:text="${product.productName}"></td>
-        <td><p th:text="${product.quantity}"></td>
-        <td th:text="|£${product.getTotalPrice()}|"></td>
+                <div th:each="product : ${cart}">
+                    <tr>
+                        <td th:text="${product.productName}"></td>
+                        <td th:text="${product.quantity}"></td>
+                        <td th:text="|£${product.getTotalPrice()}|"></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
 
-</div>
-<h2>Total Price</h2>
-<p th:text="|£${cart.getTotalCost()}|"></p>
-    <button type="submit">Confirm Order</button>
-</form>
+            <b><span th:text="|Total Price: £${cart.getTotalCost()}|"></span></b>
+            <button type="submit">Confirm Order</button>
+        </form>
+    </div>
 </body>
 </html>

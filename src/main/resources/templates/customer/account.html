@@ -1,12 +1,18 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>My Account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>Customer Account</h1>
-<a href="/account/orders">View Orders</a>
-<a href="/account/details">View Account Details</a>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
+    <h1>My Account</h1>
+    <a href="/account/orders" class="link-button">View Orders</a>
+    <a href="/account/details" class="link-button">View Account Details</a>
+</div>
 </body>
 </html>

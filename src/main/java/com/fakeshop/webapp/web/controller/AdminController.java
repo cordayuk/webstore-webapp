@@ -57,16 +57,16 @@ public class AdminController {
     public String addProductForm(Model model) {
         if(!model.containsAttribute("product")){
             model.addAttribute("product", new Product());
-            model.addAttribute("action", "/admin/products/add");
-            model.addAttribute("heading", "Add");
         }
+        model.addAttribute("action", "/admin/products/add");
+        model.addAttribute("heading", "Add");
         // action must post to /admin/products/add
         return "admin/productform";
     }
 
     //receive add product form
     @RequestMapping(value = "/admin/products/add", method = RequestMethod.POST)
-    public String addProduct(Product product, @PathVariable MultipartFile file){
+    public String addProduct(Product product, @RequestParam MultipartFile file){
         productService.save(product, file);
 
         return String.format("redirect:/admin/products/%s", product.getId());
@@ -77,14 +77,14 @@ public class AdminController {
     public String editProduct(@PathVariable Long productId, Model model) {
         if(!model.containsAttribute("product")){
             model.addAttribute("product", productService.findById(productId));
-            model.addAttribute("heading", "Edit");
         }
+        model.addAttribute("heading", "Edit");
         //action to post to /admin/products/{productId}/edit
         return "admin/productform";
     }
     //receive edit product form - might not need at all. works if form is passed to product add
     @RequestMapping(value = "/admin/products/{productId}/edit", method = RequestMethod.POST)
-    public String updateProduct(@PathVariable Long productId, Product product, MultipartFile file) {
+    public String updateProduct(@PathVariable Long productId, Product product, @RequestParam MultipartFile file) {
         productService.save(product, file);
 
         return String.format("redirect:/admin/products/%s", product.getId());

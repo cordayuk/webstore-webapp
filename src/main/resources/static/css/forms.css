@@ -1,0 +1,38 @@
+.container {
+    width: auto;
+    margin: 20px;
+    text-align: center;
+
+}
+
+label {
+    display: block
+    margin: 5px;
+}
+
+input {
+    display: inline-block;
+    margin: 5px;
+}
+
+
+button {
+     color: white;
+     background-color: #333333;
+     border-radius: 25px;
+     text-align: center;
+     text-decoration: none;
+     font-size: 16px;
+     padding: 15px 32px;
+ }
+
+.button-container {
+    text-align: center;
+    display: block;
+    margin: 10px;
+}
+
+.input-container {
+    text-align: center;
+    display: block;
+}

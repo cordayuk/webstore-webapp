@@ -3,73 +3,79 @@
 <head>
     <title>Edit user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+<div class="container">
 <h1>Edit User</h1>
-<form action="/admin/users/edit" th:object="${user}" method="post">
-    <div class="container">
-        <input type="hidden" th:field="*{id}"/>
+    <form action="/admin/users/edit" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{id}"/>
 
-        <label><b>Email</b></label>
-        <input type="text" placeholder="Email" name="email" th:field="*{email}"required />
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Email" name="email" th:field="*{email}"required />
 
-        <label><b>Name</b></label>
-        <input type="text" placeholder="Name" name="name" th:field="*{name}"required />
+            <label><b>Name</b></label>
+            <input type="text" placeholder="Name" name="name" th:field="*{name}"required />
 
-        <label><b>Role</b></label>
-        <select name="roleId" size="2">
-            <div th:if="*{role.id} == 2">
-                <option selected value="2">Admin</option>
-                <option value="1">Customer</option>
-            </div>
+            <label><b>Role</b></label>
+            <select name="roleId" size="2" class="selection">
+                <div th:if="*{role.id} == 2">
+                    <option selected value="2">Admin</option>
+                    <option value="1">Customer</option>
+                </div>
 
-            <div th:if="*{role.id} == 1">
-                <option value="2" >Admin</option>
-                <option selected value="1">Customer</option>
-            </div>
-        </select>
+                <div th:if="*{role.id} == 1">
+                    <option value="2" >Admin</option>
+                    <option selected value="1">Customer</option>
+                </div>
+            </select>
 
-        <label><b>Not Expired</b></label>
-        <select name="nonExpired" size="2">
-            <div th:if="${user.getNonExpired()} == true">
-                <option selected value=true>True</option>
-                <option  value=false>False</option>
-            </div>
+            <label><b>Not Expired</b></label>
+            <select name="nonExpired" size="2" class="selection">
+                <div th:if="${user.getNonExpired()} == true">
+                    <option selected value=true>True</option>
+                    <option  value=false>False</option>
+                </div>
 
-            <div th:if="${user.getNonExpired()} == false">
-                <option  value=true>True</option>
-                <option selected value=false>False</option>
-            </div>
-        </select>
+                <div th:if="${user.getNonExpired()} == false">
+                    <option  value=true>True</option>
+                    <option selected value=false>False</option>
+                </div>
+            </select>
 
-        <label><b>Not Locked</b></label>
-        <select name="nonLocked" size="2">
-            <div th:if="${user.getNonLocked()} == true">
-                <option selected value=true>True</option>
-                <option  value=false>False</option>
-            </div>
+            <label><b>Not Locked</b></label>
+            <select name="nonLocked" size="2" class="selection">
+                <div th:if="${user.getNonLocked()} == true">
+                    <option selected value=true>True</option>
+                    <option  value=false>False</option>
+                </div>
 
-            <div th:if="${user.getNonLocked()} == false">
-                <option  value=true>True</option>
-                <option selected value=false>False</option>
-            </div>
-        </select>
+                <div th:if="${user.getNonLocked()} == false">
+                    <option  value=true>True</option>
+                    <option selected value=false>False</option>
+                </div>
+            </select>
 
-        <label><b>Enabled</b></label>
-        <select name="enabled" size="2">
-            <div th:if="${user.getEnabled()} == true">
-                <option selected value=true>True</option>
-                <option value=false>False</option>
-            </div>
+            <label><b>Enabled</b></label>
+            <select name="enabled" size="2" class="selection">
+                <div th:if="${user.getEnabled()} == true">
+                    <option selected value=true>True</option>
+                    <option value=false>False</option>
+                </div>
 
-            <div th:if="${user.getEnabled()} == false">
-                <option value=true>True</option>
-                <option selected value=false>False</option>
-            </div>
-        </select>
+                <div th:if="${user.getEnabled()} == false">
+                    <option value=true>True</option>
+                    <option selected value=false>False</option>
+                </div>
+            </select>
 
-        <button type="submit">Edit</button>
-    </div>
-</form>
+            <button type="submit">Edit</button>
+
+    </form>
+</div>
 </body>
 </html>

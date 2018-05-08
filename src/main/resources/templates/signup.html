@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign-up</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <form th:action="@{/signup}"th:object="${newUser}" method="post">
     <div class="container">
+        <h1>Example.com</h1>
         <label><b>Username</b></label>
-        <input type="text" th:field="*{email}" placeholder="Enter Email" name="email" required>
+        <div class="input-container">
+            <input type="text" th:field="*{email}" placeholder="Enter Email" name="email" required>
+        </div>
 
         <label><b>Password</b></label>
-        <input type="password" th:field="*{password}" placeholder="Enter Password" name="password" required>
-
+        <div class="input-container">
+            <input type="password" th:field="*{password}" placeholder="Enter Password" name="password" required>
+        </div>
         <label><b>Name</b></label>
-        <input type="text" th:field="*{name}" placeholder="Your Name" name="name" required>
-
-        <button type="submit">Login</button>
+        <div class="input-container">
+            <input type="text" th:field="*{name}" placeholder="Your Name" name="name" required>
+        </div>
+        <div class="button-container">
+            <button type="submit">Login</button>
+        </div>
     </div>
 </form>
 </body>

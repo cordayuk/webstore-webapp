@@ -2,25 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title th:text="${product.name}"></title>
+    <title th:text="|Example.com - ${product.name}|"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome/css/fontawesome-all.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1 th:text="${product.name}"></h1>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <a th:href="|/admin/products/${product.id}/edit|"><h2>Edit</h2></a>
-    <h2>Remove From Sale</h2>
-    <form th:action="|/admin/products/${product.id}/delete|" method="post">
-        <button type="submit">Remove From Sale</button>
-    </form>
+<div th:replace="fragments/nav-bar :: nav-bar"></div>
+
+<div class="product-details-container">
+    <u><h1 th:text="${product.name}"></h1></u>
+
+
+    <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}" height="400" width="400" />
+    <div class="details">
+        <p th:text="${product.description}"></p>
+        <h2 th:text="|£${product.price}|"></h2>
+        <form action="/cartadd" method="post">
+            <input type="hidden" name="id" th:value="${product.id}"/>
+            <input class="number-input" type="number" value="1" min="1" name="quantity"/>
+            <button type="submit">Add to cart</button>
+        </form>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="admin-options">
+        <a th:href="|/admin/products/${product.id}/edit|" class="link-button">Edit Product</a>
+        <form th:action="|/admin/products/${product.id}/delete|" method="post">
+            <button type="submit">Remove From Sale</button>
+        </form>
+    </div>
+
 </div>
-<img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}"/>
-<h2 th:text="|£${product.price}|"></h2>
-<p th:text="${product.description}"></p>
-<form action="/cartadd" method="post">
-    <input type="hidden" name="id" th:value="${product.id}"/>
-    <input type="number" value="1" min="1" name="quantity"/>
-    <button type="submit">Add to cart</button>
-</form>
 </body>
 </html>
