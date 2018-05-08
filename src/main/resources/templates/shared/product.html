@@ -19,7 +19,7 @@
     <img th:src="@{|/products/${product.id}.jpg|}" th:alt="${product.name}" height="400" width="400" />
     <div class="details">
         <p th:text="${product.description}"></p>
-        <h2 th:text="|£${product.price}|"></h2>
+        <h2 th:text="|£${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}|"></h2>
         <form action="/cartadd" method="post">
             <input type="hidden" name="id" th:value="${product.id}"/>
             <input class="number-input" type="number" value="1" min="1" name="quantity"/>

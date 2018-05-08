@@ -25,7 +25,7 @@
                 <form action="/cartupdate" method="post">
                 <td th:text="${product.productName}"></td>
                 <td><input type="number" th:value="${product.quantity}" min="0" name="quantity"></td>
-                <td th:text="|£${product.getTotalPrice()}|"></td>
+                <td th:text="|£${#numbers.formatDecimal(product.getTotalPrice(), 0, 'COMMA', 2, 'POINT')}|"></td>
                 <td>
                     <input type="hidden" name="id" th:value="${product.product.id}"/>
                     <button type="submit">Update</button>
@@ -41,7 +41,7 @@
         </div>
         <td></td>
         <td><b>Total Cost:</b></td>
-        <td th:text="|£${cart.getTotalCost()}|"></td>
+        <td th:text="|£${#numbers.formatDecimal(cart.getTotalCost(), 0, 'COMMA', 2, 'POINT')}|"></td>
         <a href="/checkout" class="link-button">Checkout</a>
     </table>
 </div>

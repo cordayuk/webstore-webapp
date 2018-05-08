@@ -30,6 +30,7 @@ dependencies {
 
 
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.1.RELEASE'
 
     // Database dependencies
     runtime "com.h2database:h2:1.4.196"

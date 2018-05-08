@@ -17,7 +17,7 @@
         <span th:text="${order.user.email}"></span>
     </div>
     <h2>Date</h2>
-    <span th:text="${order.orderDate}"></span>
+    <span th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy - HH:mm')}"></span>
     <h2>Delivery Address</h2>
     <span th:text="${order.deliveryAddress}"></span>
     <h2>Payment Address</h2>
@@ -32,13 +32,13 @@
             <tr>
                 <td th:text="${orderDetails.product.name}"></td>
                 <td th:text="${orderDetails.quantity}"></td>
-                <td th:text="|£${orderDetails.getTotalPrice()}|"></td>
+                <td th:text="|£${#numbers.formatDecimal(orderDetails.getTotalPrice(), 0, 'COMMA', 2, 'POINT')}||"></td>
             </tr>
         </div>
         <tr>
             <td></td>
             <td><b>Total Price:</b></td>
-            <td th:text="|£${order.cost}|"></td>
+            <td th:text="|£${#numbers.formatDecimal(order.cost, 0, 'COMMA', 2, 'POINT')}|"></td>
         </tr>
     </table>
 </div>

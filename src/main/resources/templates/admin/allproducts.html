@@ -24,7 +24,7 @@
             <tr>
                 <td><a th:href="@{|/admin/products/${product.id}|}"><b th:text="${product.id}"></b></a></td>
                 <td><a th:href="@{|/admin/products/${product.id}|}"><b th:text="${product.name}"></b></a></td>
-                <td><a th:href="@{|/admin/products/${product.id}|}"><b th:text="|£${product.Price}|"></b></a></td>
+                <td><a th:href="@{|/admin/products/${product.id}|}"><b th:text="|£${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}|"></b></a></td>
                 <td><a th:href="@{|/admin/products/${product.id}|}"><b th:text="${product.forSale}"></b></a></td>
             </tr>
         </div>
