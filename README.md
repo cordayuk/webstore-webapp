@@ -1,6 +1,6 @@
-<h1>E-Shop Webapp</h1>
+<h1>Internet Shop Webapp</h1>
 <h2>Introduction</h2>
-<p>The main purpose of this project is to showcase my abilities in creating back-end systems in Java. I decided to create a webapp for an e-shop as it requires me to consider a wide variety of issues, such as data security, relational databases and needs of users. Although the project is functional, there are many improvements and features I would like to implement and these will be documented below. Firstly I will explain how to run the application in IntelliJ.</p>
+<p>The main purpose of this project is to showcase my abilities in creating back-end systems in Java. I decided to create a webapp for an internet shop as it requires me to consider a wide variety of issues, such as data security, relational databases and needs of users. Although the project is functional, there are many improvements and features I would like to implement and these will be documented below. Firstly I will explain how to run the application in IntelliJ.</p>
 <h2>Running the Application</h2>
 <h3>Step 1- Setup</h3>
 <p>Having cloned the project into IntelliJ there are a few brief things that need to be setup before running. You can either run the application with an in memory database or the pre-made example database. The steps for setting up each will be listed below.</p>
