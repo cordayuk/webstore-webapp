@@ -12,7 +12,7 @@
 <form th:action="@{/signup}"th:object="${newUser}" method="post">
     <div class="container">
         <h1>Example.com</h1>
-        <label><b>Username</b></label>
+        <label><b>E-Mail</b></label>
         <div class="input-container">
             <input type="text" th:field="*{email}" placeholder="Enter Email" name="email" required>
         </div>
@@ -26,7 +26,7 @@
             <input type="text" th:field="*{name}" placeholder="Your Name" name="name" required>
         </div>
         <div class="button-container">
-            <button type="submit">Login</button>
+            <button type="submit">Sign-up</button>
         </div>
     </div>
 </form>
