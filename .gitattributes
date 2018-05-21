@@ -1,2 +1,2 @@
-$ cat .gitattributes
-src/main/resources/static/*.css linguist-vendored
+src/main/resources/static/* linguist-vendored
+*.css linguist-vendored=false
